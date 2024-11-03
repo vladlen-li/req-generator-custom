@@ -16,6 +16,7 @@
 
 	import Tab, { Label } from "@smui/tab";
 	import TabBar from "@smui/tab-bar";
+    import IBAN from "./components/iban.svelte";
 	const tabs = ["RU ЮЛ", "RU ИП", "BY", "KZ", "UZ", "Other"];
 	let active = tabs[0];
 	let isLoaded = false;
@@ -64,6 +65,7 @@
 				<IIN bind:generate={callbacks[0]} isIE={false} />
 				<IIN bind:generate={callbacks[1]} isIE={true} />
 				<GLN bind:generate={callbacks[2]} />
+				<IBAN bind:generate={callbacks[3]} />
 			{/if}
 			{#if active === tabs[4]}
 				<INNUZ bind:generate={callbacks[0]} isIE={false} />
