@@ -1,18 +1,19 @@
 {
   "name": "Requisites Generator",
-  "version": "1.51",
+  "version": "1.53",
   "description": "Generates INN, OKPO, SNILS, BIN, IIN, UNP",
   "action": {
-    "default_popup": "./index.html"
+    "default_popup": "index.html"
   },
-  "browser_specific_settings": {
+    "browser_specific_settings": {
     "gecko": {
       "id": "vladli2000610@gmail.com"
     }
   },
   "manifest_version": 3,
   "permissions": [
-    "activeTab"
+    "storage",
+    "windows"
   ],
   "icons": {
     "128": "favicon.png"
