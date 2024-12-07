@@ -1,25 +1,18 @@
 const LS_ITEM_NAME = 'req-gen-data'
 class Store {
-  static async getFromChromeStorage () {
-    return new Promise((resolve) => {
-      if (chrome?.storage) {
-        try {
-          return chrome.storage.local.get([LS_ITEM_NAME], (data) => {
-            resolve(data[LS_ITEM_NAME])
-          })
-        } catch (err) {
-          console.log(err)
-        }
-        return {}
-      }
-      resolve({})
-    })
+  static getFromChromeStorage () {
+    try {
+      return localStorage.getItem(LS_ITEM_NAME)
+    } catch (err) {
+      console.log(err)
+    }
+    return {}
   }
 
   static async init () {
     let data = {}
     try {
-      data = JSON.parse(localStorage.getItem(LS_ITEM_NAME)) || await Store.getFromChromeStorage() || {}
+      data = JSON.parse(localStorage.getItem(LS_ITEM_NAME)) || Store.getFromChromeStorage() || {}
     } catch (err) {
       console.log(err)
     }
@@ -27,13 +20,13 @@ class Store {
     Store._data = data
   }
 
-  static async saveData () {
+  static saveData () {
     localStorage.setItem(LS_ITEM_NAME, JSON.stringify(Store._data))
-    if (chrome?.storage) {
-      await new Promise(resolve => {
-        chrome?.storage?.local?.set?.({ [LS_ITEM_NAME]: JSON.stringify(Store._data) }, resolve)
-      })
-    }
+    // if (chrome?.storage) {
+    //   await new Promise(resolve => {
+    //     chrome?.storage?.local?.set?.({ [LS_ITEM_NAME]: JSON.stringify(Store._data) }, resolve)
+    //   })
+    // }
   }
 
   static getValue (requisite) {
